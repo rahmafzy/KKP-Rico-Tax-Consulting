@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rico Tax consulting</title>
+    <style>
+        /* --- CSS Reset & Variables --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #0066cc;
+            --secondary: #333333;
+            --light: #f4f6f9;
+            --white: #ffffff;
+            --text: #555555;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* --- Navigation --- */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li a {
+            color: var(--secondary);
+            text-decoration: none;
+            padding: 5px 15px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links li a:hover {
+            color: var(--primary);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            background: linear-gradient(rgba(0, 102, 204, 0.1), rgba(0, 0, 0, 0.7)), 
+                        url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=8') no-repeat center center/cover;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--white);
+            padding: 20px;
+            margin-top: 60px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 20px;
+            max-width: 600px;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #0052a3;
+        }
+
+        /* --- Sections General --- */
+        section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 32px;
+            color: var(--secondary);
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary);
+            margin: 10px auto 0;
+        }
+
+        /* --- About Section --- */
+        .about-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .about-img img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        /* --- Services Section --- */
+        .services-bg {
+            background-color: var(--light);
+            max-width: 100%;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-icon {
+            font-size: 40px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        /* --- Contact Section --- */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-form input, .contact-form textarea {
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        .contact-form button {
+            background-color: var(--secondary);
+            color: var(--white);
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .contact-form button:hover {
+            background-color: var(--primary);
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: var(--secondary);
+            color: var(--white);
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 40px;
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 768px) {
+            .navbar { flex-direction: column; gap: 15px; }
+            .about-container, .contact-container { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 32px; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navigation -->
+    <header>
+        <nav class="navbar">
+            <a href="#" class="logo">Rico Tax consulting</a>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Innovating For Your Business Growth</h1>
+        <p2>Berbekal dengan sejumlah pengalamann dalam bidang akuntansi dan perpajakan, KKP "Rico Tax Consulting" siap memberikan pelayanan di bidang akuntansi dan perpajakan secara optimal bagi para klien.            
+        
+        
+        </p2>
+        
+        
+        <a href="#contact" class="btn">Get Started</a>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2 class="section-title">About Us</h2>
+        <div class="about-container">
+            <div class="about-text">
+                <h3></h3>
+                <p style="margin-bottom: 15px;">Rico Tax Consulting merupakan kantor konsultan pajak yang berdiri sejak tahun 2021 di Kota Semarang dan telah memiliki Izin Praktik Konsultan Pajak dari Direktorat Jenderal Pajak dengan nomor KEP-7276/IP.A/PK/2021. Kantor ini didirikan oleh Bapak Rico Yusfana, S.E., S. H., BKP. yang memiliki pengalaman di bidang akuntansi dan perpajakan. Berlokasi di Perum Pandana Merdeka Blok N-26, Ngaliyan, Semarang, Rico Tax Consulting hadir sebagai mitra profesional dalam bidang perpajakan dan akuntansi bagi berbagai jenis usaha. Rico Tax Consulting beroperasi setiap hari Senin -  Jumat, pukul 08.30 WIB s. d 16.30 WIB.</p>
+               
+            </div>
+            <div class="about-img">
+                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80" alt="Team meeting">
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <div class="services-bg">
+        <section id="services">
+            <h2 class="section-title">Visi dan Misi</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon"></div>
+                    <h3>Visi</h3>
+                    <p>
+We are committed to performing beyond the excellence standard 
+in the tax consulting industry</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">️</div>
+                    <h3>Misi</h3>
+                    <p>To improve the values of our clients and employees to build a 
+sustainable relationship with us</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"></div>
+                    <h3>Layanan Utama</h3>
+                    <p>1. Jasa perencanaan pajak</p>
+                    <p>2. Jasa penyusunan laporan pajak</p>
+                    <p>3. Jasa pendampingan klien</p>
+                    <p>4. Administrasi perpajakan</p>
+                    <p>5. Jasa fungsi audit internal</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2 class="section-title">Contact Us</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>Let's Work Together</h3>
+                <p style="margin-bottom: 20px;">Have a project in mind or need a consultation? Drop us a line and our corporate strategy team will get back to you within 24 business hours.</p>
+                <p> <strong>Address:</strong> Perum Pandana Merdeka Blok N-26, Ngaliyan, Semarang</p>
+                <p> <strong>Instagram:</strong> @rtc_semarang</p>
+                <p> <strong>Phone:</strong> +62 811-2898-889</p>
+            </div>
+            <form class="contact-form" onsubmit="event.preventDefault(); alert('Message sent simulated!');">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email Address" required>
+                <textarea rows="5" placeholder="Tell us about your project needs..." required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; Rico Tax consulting</p>
+    </footer>
+
+</body>
+</html>
